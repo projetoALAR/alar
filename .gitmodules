@@ -1,0 +1,8 @@
+[submodule "workspace-juridico-backend"]
+	path = workspace-juridico-backend
+	url = https://github.com/projetoALAR/backend.git
+	branch = feat/integracao-api
+[submodule "workspace-juridico-frontend"]
+	path = workspace-juridico-frontend
+	url = https://github.com/projetoALAR/frontend.git
+	branch = feat/integracao-api

@@ -1,0 +1,56 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: alar
+      POSTGRES_PASSWORD: alar
+      POSTGRES_DB: alar
+    ports:
+      - "5432:5432"
+    volumes:
+      - alar_pg:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U alar -d alar"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  api:
+    build:
+      context: ./workspace-juridico-backend
+    ports:
+      - "3001:3001"
+    environment:
+      PORT: 3001
+      NODE_ENV: production
+      DATABASE_URL: postgresql://alar:alar@db:5432/alar
+      DIRECT_URL: postgresql://alar:alar@db:5432/alar
+      JWT_SECRET: change-me-in-production-use-long-secret
+      JWT_EXPIRES_IN: 7d
+      CORS_ORIGINS: http://localhost:3000
+      AUTH_ALLOW_PUBLIC_REGISTER: "false"
+      AUTH_ADMIN_EMAIL: admin@alar.com.br
+      AUTH_ADMIN_PASSWORD: AlarAdminChangeMe1
+      AUTH_ADMIN_NOME: Administrador
+      SUPABASE_URL: ${SUPABASE_URL:-}
+      SUPABASE_KEY: ${SUPABASE_KEY:-}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "fetch('http://127.0.0.1:3001/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))",
+        ]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+    command: >
+      sh -c "npx prisma migrate deploy && node dist/main.js"
+
+volumes:
+  alar_pg:
