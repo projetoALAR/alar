@@ -1,7 +1,7 @@
 # Relatório de mudanças — Alar
 
 **Para:** Luiz  
-**Data:** 05/08/2026  
+**Data:** 05/08/2026 (atualizado no mesmo dia)  
 **Branch:** `feat/integracao-api` (backend e frontend)
 
 **Base de comparação**
@@ -14,9 +14,13 @@
 |------|-----|
 | Backend | https://github.com/projetoALAR/backend (também: workspace-juridico-backend) |
 | Frontend | https://github.com/projetoALAR/frontend |
-| Orquestração | https://github.com/projetoALAR/alar (Compose, README raiz, submodules) |
+| Orquestração | https://github.com/projetoALAR/alar (Compose, README, roadmap, submodules) |
 
 Tudo abaixo **já foi commitado e enviado** para a org.
+
+**Docs úteis no repo `alar`**
+- Este relatório: [`RELATORIO-MUDANCAS-PARA-LUIZ.md`](https://github.com/projetoALAR/alar/blob/main/RELATORIO-MUDANCAS-PARA-LUIZ.md)
+- Próximas etapas: [`ROADMAP.md`](https://github.com/projetoALAR/alar/blob/main/ROADMAP.md)
 
 ---
 
@@ -32,6 +36,13 @@ Tudo abaixo **já foi commitado e enviado** para a org.
 1. `e4642d0` — UI do chat separado + ajustes de layout
 2. `2999915` — calendário + descrição nos casos
 3. `62ae1d4` — RBAC na UI, painel admin, scroll no chat, CI/README
+4. `f928d83` — **corrige layout mobile** (sidebar sobreposta, chat, casos, calendário)
+
+### Repo `alar` (main)
+
+1. Orquestração inicial (Compose, README, submodules, CI da raiz)
+2. Este relatório de mudanças
+3. **`ROADMAP.md`** + link no README — próximas fases do produto
 
 ---
 
@@ -116,20 +127,40 @@ Tudo abaixo **já foi commitado e enviado** para a org.
 - Nome `alar-frontend`; metadata Alar (sem branding v0)
 - README + CI do frontend
 
+## 2.5 Responsividade mobile (`f928d83`) — **atualização recente**
+
+Problema: no celular a **sidebar fixa** cobria o conteúdo (sobreposição).
+
+Correções:
+- Sidebar **escondida no mobile**; menu via hamburger (Sheet)
+- Variante `Sidebar mobile` (sem `fixed`) dentro do drawer
+- Menu mobile também em páginas sem Header completo: **Casos**, **Calendário**, **Chat**
+- Chat: histórico em sheet no mobile (“Conversas”); lado a lado só no desktop
+- Cards de casos: botões usáveis no touch; menos overflow
+- Calendário e mains com `min-w-0` / `overflow-x-hidden`
+- Header: nome/e-mail truncados para não estourar a barra
+
+Arquivos principais: `sidebar.tsx`, `mobile-nav.tsx`, `app/chat/page.tsx`, `app/tasks/page.tsx`, `app/calendar/page.tsx`, `tasks-content.tsx`, etc.
+
 ---
 
 # 3. Repo `alar` (orquestração)
 
-- `README.md` unificado
+- `README.md` unificado (+ link para o roadmap)
 - `docker-compose.yml` (Postgres + API)
 - Workflows da raiz
 - Submodules apontando para backend e frontend
+- `RELATORIO-MUDANCAS-PARA-LUIZ.md` (este arquivo)
+- **`ROADMAP.md`** — próximas etapas (ver seção 6)
 
 Clone completo:
 
 ```bash
 git clone --recurse-submodules https://github.com/projetoALAR/alar.git
 ```
+
+> Se o submodule do frontend ainda apontar para um commit antigo, após o pull rode  
+> `git submodule update --remote` (ou atualize o ponteiro no repo `alar`) para pegar o `f928d83`.
 
 ---
 
@@ -149,10 +180,16 @@ git clone --recurse-submodules https://github.com/projetoALAR/alar.git
    - `AUTH_ADMIN_PASSWORD` (≥ 8)
    - Bucket `documentos` **privado** + `SUPABASE_KEY` = service_role
 
+4. No front: `git pull` até incluir **`f928d83`** e testar no DevTools (modo celular)
+
 ### OpenAI
 
 Sem troca de provedor — continua `OPENAI_API_KEY` / `OPENAI_MODEL` (ex.: `gpt-4o-mini`).  
 Só melhoramos contexto, PDF e prompts.
+
+### Frase útil no Cursor (Agent)
+
+> Puxa as mudanças do Izack (branch `feat/integracao-api` na org projetoALAR), instala as deps e roda o migrate. Não faça commit nem push.
 
 ---
 
@@ -160,11 +197,29 @@ Só melhoramos contexto, PDF e prompts.
 
 | Área | Mudança |
 |------|---------|
-| Chat | Geral ≠ caso; privacidade; PDF; scroll |
+| Chat | Geral ≠ caso; privacidade; PDF; scroll; histórico mobile em sheet |
 | Auth | RBAC 3 papéis; admin cria users; register off |
 | API | DTOs + ValidationPipe |
 | Segurança | Helmet, CORS, throttle, health 503 |
 | Docs | Signed URLs + MIME allowlist |
+| Mobile | Sidebar no hamburger; Casos/Calendário/Chat usáveis no celular |
 | Ops | CI, Docker, `.env.example`, repo `alar` |
+| Planejamento | `ROADMAP.md` com fases 0–6 |
+
+---
+
+# 6. Roadmap (próximas etapas)
+
+Documento: https://github.com/projetoALAR/alar/blob/main/ROADMAP.md
+
+Foco sugerido das próximas **2–4 semanas**:
+1. Staging + deploy + Sentry  
+2. AuditLog + export/delete LGPD + disclaimer da IA  
+3. Responsável no caso + timeline  
+4. Citações no chat do caso / Swagger  
+
+Fases no arquivo: operação → segurança/LGPD → produto/UX → IA → engenharia → escala/negócio.
+
+---
 
 Qualquer dúvida, chama no chat / PR em `feat/integracao-api`.
