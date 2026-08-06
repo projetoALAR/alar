@@ -69,17 +69,18 @@ Ordem sugerida nesta fase:
 4. Deploy com HTTPS + CORS  
 5. Staging Supabase separado **quando** a URL for pública  
 
-- [ ] Runbook curto: subir local, criar admin, o que fazer se `/health` cair
-- [ ] **Sentry** (ou similar) no backend e no frontend
-- [ ] Logs estruturados na API (request id, user id, rota)
-- [ ] Documentar **backup/restore** do Postgres (Supabase ou dump)
-- [ ] Secrets só em painel/CI; checklist de rotação (`JWT_SECRET`, `SUPABASE_KEY`)
+- [x] Runbook curto: subir local, criar admin, o que fazer se `/health` cair
+- [x] **Sentry** (ou similar) no backend e no frontend *(opcional via DSN; ver RUNBOOK)*
+- [x] Logs estruturados na API (request id, user id, rota)
+- [x] Documentar **backup/restore** do Postgres (Supabase ou dump) *(no RUNBOOK)*
+- [x] Secrets só em painel/CI; checklist de rotação (`JWT_SECRET`, `SUPABASE_KEY`) *(no RUNBOOK)*
 - [ ] Deploy da **API** (ex.: Railway, Fly, Render) com HTTPS
 - [ ] Deploy do **frontend** (ex.: Vercel) apontando para a API
 - [ ] Domínio + CORS (`CORS_ORIGINS`) alinhados ao front real
 - [ ] Separar ambientes **dev / staging / prod** (segundo Supabase) quando houver URL pública
 
-**Critério de pronto:** app acessível por HTTPS (ou staging), health ok, erro de teste aparece no Sentry.
+**Critério de pronto:** app acessível por HTTPS (ou staging), health ok, erro de teste aparece no Sentry.  
+**Parcial:** runbook + Sentry + logs prontos; falta deploy HTTPS.
 
 ---
 
@@ -184,6 +185,7 @@ Fase 0 concluída. Ordem recomendada:
 
 ## Referências
 
+- Runbook (operação): [`RUNBOOK.md`](./RUNBOOK.md)
 - Relatório das mudanças recentes: [`RELATORIO-MUDANCAS-PARA-LUIZ.md`](./RELATORIO-MUDANCAS-PARA-LUIZ.md)
 - Setup atual: [`README.md`](./README.md)
 - Org: [github.com/projetoALAR](https://github.com/projetoALAR)
