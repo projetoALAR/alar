@@ -11,8 +11,8 @@ Itens já entregues (RBAC, signed URLs, validação, health, CI, Docker, chat ge
 
 | Fase | Foco | Horizonte sugerido |
 |------|------|--------------------|
-| **0** | Fundação de operação | 1 semana |
-| **1** | Confiança (staging, deploy, erros) | 1–2 semanas |
+| **0** | Fundação de operação | ✅ concluída |
+| **1** | Confiança (runbook, Sentry, deploy) | 1–2 semanas ← atual |
 | **2** | Segurança & LGPD | 2–3 semanas |
 | **3** | Produto / UX de escritório | 2–4 semanas |
 | **4** | IA com qualidade | 2 semanas |
@@ -21,30 +21,65 @@ Itens já entregues (RBAC, signed URLs, validação, health, CI, Docker, chat ge
 
 ---
 
-## Fase 0 — Alinhamento (agora)
+## Fase 0 — Alinhamento ✅
 
-- [ ] Revisar este roadmap com o time (Izack + Luiz)
-- [ ] Definir ambiente oficial de dados (só Supabase prod? ou staging separado?)
-- [ ] Lista do que é “bloqueador para mostrar a um cliente”
-- [ ] Dono de cada fase (quem puxa)
+**Status:** decisões fechadas (Izack + Luiz; trabalho em conjunto em todas as fases).
+
+### Decisões
+
+**Ambiente de dados**
+- Por enquanto: **um único projeto Supabase** (dev/demo compartilhado).
+- Criar **staging separado** (`alar-staging`) só quando front/API tiverem **URL pública** para mostrar a terceiros.
+- Enquanto isso: senhas fortes, bucket privado, sem compartilhar URL de produção com cliente final.
+
+**Bloqueadores para mostrar a um cliente** (obrigatório antes da demo externa)
+
+| Obrigatório | Motivo |
+|-------------|--------|
+| HTTPS (front + API) | confiança básica |
+| Login + RBAC ok | não vazar dados |
+| Disclaimer da IA | risco jurídico |
+| Mobile usável | demo no celular |
+| Health + como criar usuário documentado | não travar na demo |
+| Bucket privado + `service_role` | documentos sensíveis |
+
+**Não bloqueia demo:** 2FA, multi-tenant, Stripe, busca global, Sentry (desejável, mas demo possível sem).
+
+**Time**
+- Izack e Luiz fazem **tudo juntos** — sem dono exclusivo por fase.
+- Cursor ajuda a manter o roadmap e a implementar.
+
+### Checklist
+
+- [x] Revisar este roadmap com o time
+- [x] Definir ambiente oficial de dados
+- [x] Lista do que é bloqueador para mostrar a um cliente
+- [x] Forma de trabalho: tudo em conjunto (sem divisão rígida de donos)
 
 ---
 
-## Fase 1 — Confiança e operação
+## Fase 1 — Confiança e operação ← **agora**
 
 Objetivo: o sistema sobe, falha de forma visível e dá para recuperar.
 
-- [ ] Separar ambientes **dev / staging / prod** (`.env`, banco e bucket distintos)
-- [ ] Deploy da **API** (ex.: Railway, Fly, Render) com HTTPS
-- [ ] Deploy do **frontend** (ex.: Vercel) apontando para a API de staging/prod
-- [ ] Domínio + CORS (`CORS_ORIGINS`) alinhados ao front real
+Ordem sugerida nesta fase:
+1. Runbook curto  
+2. Sentry (back + front)  
+3. Logs estruturados (request id)  
+4. Deploy com HTTPS + CORS  
+5. Staging Supabase separado **quando** a URL for pública  
+
+- [ ] Runbook curto: subir local, criar admin, o que fazer se `/health` cair
 - [ ] **Sentry** (ou similar) no backend e no frontend
 - [ ] Logs estruturados na API (request id, user id, rota)
 - [ ] Documentar **backup/restore** do Postgres (Supabase ou dump)
-- [ ] Runbook curto: subir local, criar admin, o que fazer se `/health` cair
 - [ ] Secrets só em painel/CI; checklist de rotação (`JWT_SECRET`, `SUPABASE_KEY`)
+- [ ] Deploy da **API** (ex.: Railway, Fly, Render) com HTTPS
+- [ ] Deploy do **frontend** (ex.: Vercel) apontando para a API
+- [ ] Domínio + CORS (`CORS_ORIGINS`) alinhados ao front real
+- [ ] Separar ambientes **dev / staging / prod** (segundo Supabase) quando houver URL pública
 
-**Critério de pronto:** staging acessível por URL, health ok, erro de teste aparece no Sentry.
+**Critério de pronto:** app acessível por HTTPS (ou staging), health ok, erro de teste aparece no Sentry.
 
 ---
 
@@ -130,10 +165,10 @@ Só quando houver demanda real de mais de um escritório / monetização.
 
 ## Próximas 2–4 semanas (foco sugerido)
 
-Ordem recomendada se o time for enxuto:
+Fase 0 concluída. Ordem recomendada:
 
-1. **Fase 1** — staging + deploy + Sentry  
-2. **Fase 2** — AuditLog + export/delete LGPD + disclaimer IA  
+1. **Fase 1** — runbook → Sentry → logs → deploy HTTPS (staging Supabase quando URL pública)  
+2. **Fase 2** — AuditLog + export/delete LGPD + disclaimer IA (bloqueador de demo)  
 3. **Fase 3** — responsável no caso + timeline (+ busca se der tempo)  
 4. Em paralelo leve: **Fase 4** (citações no chat) e **Swagger** (Fase 5)
 
