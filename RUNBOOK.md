@@ -11,7 +11,7 @@ Sem secrets neste arquivo — use `.env` / `.env.local` / painel do provedor.
 | 2 | Criar / usar o admin | OK |
 | 3 | Health check | OK |
 | 4 | Logs e request id | OK (código) |
-| 5 | Sentry | Parcial — falta só colar o DSN (ver `SENTRY.md`) |
+| 5 | Sentry | OK (DSN + Issue ALAR-1; flags de teste desligadas) |
 | 6 | Backup / restore | Documentado; backup real ainda não testado |
 | 7 | Rotação de secrets | Checklist pronto; só usar se precisar rotacionar |
 | 8 | Desligar servidores | OK (procedimento) |
@@ -129,15 +129,16 @@ Use o `requestId` para correlacionar erro no Sentry / suporte.
 
 ---
 
-## 5. Sentry (erros) — parcial → quase pronto
+## 5. Sentry (erros) — OK
 
 - [x] Integração no backend (`SENTRY_DSN`) + `dotenv` antes do init
 - [x] Integração no frontend (`NEXT_PUBLIC_SENTRY_DSN`)
 - [x] Guia: [`SENTRY.md`](./SENTRY.md)
-- [x] Teste API: `GET /debug/sentry` (com `SENTRY_ENABLE_TEST_ENDPOINT=true`)
-- [x] Teste front: `/sentry-test` (com `NEXT_PUBLIC_SENTRY_ENABLE_TEST=true`)
-- [ ] Conta/projeto no [sentry.io](https://sentry.io) + DSN no `.env` / `.env.local`
-- [ ] Validar Issues no painel e depois desligar flags de teste
+- [x] DSN no `.env` (API) e `.env.local` (front) — **não commitado**
+- [x] `/health` → `"sentry": true`; bootstrap log `Sentry habilitado`
+- [x] Teste API: `GET /debug/sentry` → 500 proposital
+- [x] Página `/sentry-test` disponível com flag de teste
+- [x] Confirmar Issue no painel [sentry.io](https://sentry.io) (ALAR-1) e desligar flags de teste
 
 Sem DSN → Sentry fica desligado (app funciona normalmente).  
 Opcional em local; **recomendado** em staging/prod.
@@ -199,9 +200,9 @@ Encerrar os terminais `npm run start:dev` / `npm run dev`, ou liberar as portas 
 
 ## Próximos passos sugeridos
 
-1. Colar DSN do Sentry (fechar §5) — guia [`SENTRY.md`](./SENTRY.md)
-2. Testar um backup real (§6)
-3. No roadmap Fase 1: deploy HTTPS da API + frontend
+1. Testar um backup real (§6)
+2. No roadmap Fase 1: deploy HTTPS da API + frontend
+3. (Opcional) Resolver/ignorar issue ALAR-1 no Sentry — era só o teste
 
 ---
 

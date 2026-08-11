@@ -62,26 +62,29 @@ Itens já entregues (RBAC, signed URLs, validação, health, CI, Docker, chat ge
 
 Objetivo: o sistema sobe, falha de forma visível e dá para recuperar.
 
+**Progresso (10/08/2026):** runbook + Sentry + logs ✅ · **próximo: deploy HTTPS**
+
 Ordem sugerida nesta fase:
-1. Runbook curto  
-2. Sentry (back + front)  
-3. Logs estruturados (request id)  
-4. Deploy com HTTPS + CORS  
+1. ~~Runbook curto~~ ✅  
+2. ~~Sentry (back + front)~~ ✅  
+3. ~~Logs estruturados (request id)~~ ✅  
+4. **Deploy com HTTPS + CORS** ← agora  
 5. Staging Supabase separado **quando** a URL for pública  
 
 - [x] Runbook curto: subir local, criar admin, o que fazer se `/health` cair
-- [x] **Sentry** (ou similar) no backend e no frontend *(código + guia `SENTRY.md`; falta colar DSN)*
+- [x] **Sentry** (ou similar) no backend e no frontend *(código + DSN local + Issue ALAR-1 + flags de teste off)*
 - [x] Logs estruturados na API (request id, user id, rota)
 - [x] Documentar **backup/restore** do Postgres (Supabase ou dump) *(no RUNBOOK)*
 - [x] Secrets só em painel/CI; checklist de rotação (`JWT_SECRET`, `SUPABASE_KEY`) *(no RUNBOOK)*
-- [ ] Colar DSN do Sentry e validar Issues (ver `SENTRY.md`)
+- [x] Colar DSN do Sentry *(local; não commitado)* + Issue validada; flags de teste desligadas
 - [ ] Deploy da **API** (ex.: Railway, Fly, Render) com HTTPS
 - [ ] Deploy do **frontend** (ex.: Vercel) apontando para a API
 - [ ] Domínio + CORS (`CORS_ORIGINS`) alinhados ao front real
 - [ ] Separar ambientes **dev / staging / prod** (segundo Supabase) quando houver URL pública
+- [ ] (Opcional, antes do deploy) Smoke de **backup real** do Postgres — ver RUNBOOK §6
 
 **Critério de pronto:** app acessível por HTTPS (ou staging), health ok, erro de teste aparece no Sentry.  
-**Parcial:** runbook + Sentry código/guia + logs prontos; falta DSN + deploy HTTPS.
+**Parcial:** operação local + observabilidade ok; **falta deploy HTTPS** (bloqueador de demo externa).
 
 ---
 
@@ -167,9 +170,9 @@ Só quando houver demanda real de mais de um escritório / monetização.
 
 ## Próximas 2–4 semanas (foco sugerido)
 
-Fase 0 concluída. Ordem recomendada:
+Fase 0 concluída. Runbook + Sentry + logs da Fase 1 concluídos. Ordem recomendada:
 
-1. **Fase 1** — runbook → Sentry → logs → deploy HTTPS (staging Supabase quando URL pública)  
+1. **Agora — Fase 1 (resto):** deploy HTTPS da API + frontend + CORS (`CORS_ORIGINS`); staging Supabase só com URL pública  
 2. **Fase 2** — AuditLog + export/delete LGPD + disclaimer IA (bloqueador de demo)  
 3. **Fase 3** — responsável no caso + timeline (+ busca se der tempo)  
 4. Em paralelo leve: **Fase 4** (citações no chat) e **Swagger** (Fase 5)
@@ -187,6 +190,7 @@ Fase 0 concluída. Ordem recomendada:
 ## Referências
 
 - Runbook (operação): [`RUNBOOK.md`](./RUNBOOK.md)
+- Sentry: [`SENTRY.md`](./SENTRY.md)
 - Relatório das mudanças recentes: [`RELATORIO-MUDANCAS-PARA-LUIZ.md`](./RELATORIO-MUDANCAS-PARA-LUIZ.md)
 - Setup atual: [`README.md`](./README.md)
 - Org: [github.com/projetoALAR](https://github.com/projetoALAR)
