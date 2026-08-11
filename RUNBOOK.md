@@ -3,17 +3,32 @@
 Operação do dia a dia: subir, login admin, health e recuperação rápida.  
 Sem secrets neste arquivo — use `.env` / `.env.local` / painel do provedor.
 
+**Status operacional (atualizado 10/08/2026)**
+
+| # | Seção | Status |
+|---|--------|--------|
+| 1 | Subir local (API + front) | OK |
+| 2 | Criar / usar o admin | OK |
+| 3 | Health check | OK |
+| 4 | Logs e request id | OK (código) |
+| 5 | Sentry | Parcial — código OK; falta DSN/conta |
+| 6 | Backup / restore | Documentado; backup real ainda não testado |
+| 7 | Rotação de secrets | Checklist pronto; só usar se precisar rotacionar |
+| 8 | Desligar servidores | OK (procedimento) |
+| — | Docker Compose (opcional) | Não usado no fluxo diário |
+| — | Deploy HTTPS (Fase 1 roadmap) | Pendente |
+
 ---
 
-## 1. Subir local
+## 1. Subir local — OK
 
-### Pré-requisitos
-- Node.js 20+
-- `.env` no backend (copie de `.env.example`)
-- `.env.local` no frontend (copie de `.env.example`)
-- Supabase com Postgres + bucket **privado** `documentos`
+### Pré-requisitos — OK
+- [x] Node.js 20+
+- [x] `.env` no backend
+- [x] `.env.local` no frontend
+- [x] Supabase com Postgres + bucket **privado** `documentos`
 
-### Backend (API :3001)
+### Backend (API :3001) — OK
 
 ```bash
 cd workspace-juridico-backend
@@ -23,20 +38,23 @@ npx prisma generate
 npm run start:dev
 ```
 
-Teste: `GET http://localhost:3001/health` → `status: "ok"`, `database: "up"`.
+Teste: `GET http://localhost:3001/health` → `status: "ok"`, `database: "up"`.  
+Validado em smoke test (DB `up`).
 
-### Frontend (app :3000)
+### Frontend (app :3000) — OK
 
 ```bash
 cd workspace-juridico-frontend
-npm install
-npm run dev
+npm install   # ou: npx pnpm@9 install
+npm run dev   # ou: npx pnpm@9 run dev
 ```
 
 Abra: http://localhost:3000  
 `NEXT_PUBLIC_API_URL` deve apontar para a API (ex.: `http://localhost:3001`).
 
-### Docker (API + Postgres local, opcional)
+Sessão atual: cookie httpOnly via BFF (`/api/auth/login`).
+
+### Docker (API + Postgres local, opcional) — não usado no dia a dia
 
 Na raiz do monorepo / repo `alar`:
 
@@ -50,7 +68,7 @@ Frontend continua com `npm run dev`.
 
 ---
 
-## 2. Criar / usar o admin
+## 2. Criar / usar o admin — OK
 
 O admin é criado **só se a tabela `Usuario` estiver vazia** e existirem no `.env` do backend:
 
@@ -60,14 +78,17 @@ O admin é criado **só se a tabela `Usuario` estiver vazia** e existirem no `.e
 
 Sem senha válida → admin **não** é criado (log de aviso na API).
 
-Com cadastro público desligado (`AUTH_ALLOW_PUBLIC_REGISTER=false`):
-1. Faça login com o admin bootstrap
+- [x] Login admin validado no ambiente local
+- [x] Cadastro público desligado (`AUTH_ALLOW_PUBLIC_REGISTER=false`)
+
+Com cadastro público desligado:
+1. Faça login com o admin (valores no `.env` do backend)
 2. Em **Configurações** (admin), crie os demais usuários  
    ou `POST /auth/usuarios` com JWT de admin
 
 ---
 
-## 3. Health check
+## 3. Health check — OK
 
 ```http
 GET /health
@@ -77,6 +98,8 @@ GET /health
 |----------|-------------|
 | `200` + `database: "up"` | API e banco ok |
 | `503` + `database: "down"` | API no ar, **banco inacessível** |
+
+Validado: `status: "ok"`, `database: "up"`.
 
 ### Se `/health` cair ou der 503
 
@@ -90,9 +113,9 @@ Porta ocupada (`EADDRINUSE :::3001` / `3000`): encerrar o processo antigo ou mud
 
 ---
 
-## 4. Logs e request id
+## 4. Logs e request id — OK
 
-Cada request HTTP da API gera um log JSON, por exemplo:
+Código ativo na API. Cada request HTTP gera um log JSON, por exemplo:
 
 ```json
 {"requestId":"...","method":"GET","path":"/health","statusCode":200,"durationMs":12,"userId":null}
@@ -106,8 +129,14 @@ Use o `requestId` para correlacionar erro no Sentry / suporte.
 
 ---
 
-## 5. Sentry (erros)
+## 5. Sentry (erros) — parcial
 
+- [x] Integração no backend (`SENTRY_DSN`)
+- [x] Integração no frontend (`NEXT_PUBLIC_SENTRY_DSN`)
+- [ ] Conta/projeto no [sentry.io](https://sentry.io) + DSN preenchido
+- [ ] Teste: forçar erro e ver no painel Sentry
+
+Sem DSN → Sentry fica desligado (app funciona normalmente).  
 Opcional em local; **recomendado** em staging/prod.
 
 | Onde | Variável |
@@ -115,15 +144,15 @@ Opcional em local; **recomendado** em staging/prod.
 | Backend | `SENTRY_DSN` |
 | Frontend | `NEXT_PUBLIC_SENTRY_DSN` |
 
-Sem DSN → Sentry fica desligado (app funciona normalmente).
-
-Crie um projeto em [sentry.io](https://sentry.io), copie o DSN e reinicie os servidores.
-
-Para validar: force um erro e confira no painel Sentry (leve alguns segundos).
+Crie um projeto em Sentry, copie o DSN para o `.env` / `.env.local` e reinicie os servidores.
 
 ---
 
-## 6. Backup / restore (Postgres)
+## 6. Backup / restore (Postgres) — documentado
+
+- [x] Procedimento documentado abaixo
+- [ ] Backup real testado (painel Supabase ou `pg_dump`)
+- [ ] Restore de teste em ambiente seguro (não produção)
 
 **Supabase (painel)**  
 - Settings → Database → backups automáticos (plano)  
@@ -145,7 +174,7 @@ Prefira `DIRECT_URL` (conexão direta), não o pooler `pgbouncer`, para dump/res
 
 ## 7. Secrets — checklist de rotação
 
-Troque se houver vazamento ou saída de alguém do time:
+Use quando houver vazamento ou saída de alguém do time (não é tarefa diária):
 
 - [ ] `JWT_SECRET` (invalida sessões atuais — usuários precisam logar de novo)
 - [ ] `SUPABASE_KEY` (service_role) no painel Supabase + `.env`
@@ -153,14 +182,23 @@ Troque se houver vazamento ou saída de alguém do time:
 - [ ] `OPENAI_API_KEY`
 - [ ] `SENTRY_DSN` (se regenerado no Sentry)
 - [ ] SMTP (`SMTP_PASS`)
+- [ ] `DATAJUD_API_KEY` (se em uso)
 
 Nunca commitar `.env` / `.env.local`. Em produção: só painel do host (Vercel, Railway, etc.) ou secrets do CI.
 
 ---
 
-## 8. Desligar servidores locais
+## 8. Desligar servidores locais — OK
 
 Encerrar os terminais `npm run start:dev` / `npm run dev`, ou liberar as portas 3000/3001.
+
+---
+
+## Próximos passos sugeridos
+
+1. Configurar DSN do Sentry (fechar §5)
+2. Testar um backup real (§6)
+3. No roadmap Fase 1: deploy HTTPS da API + frontend
 
 ---
 
