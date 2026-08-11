@@ -3,7 +3,8 @@
 Sistema full-stack para gestão de escritório jurídico: clientes, casos/processos, compromissos, documentos, equipe, chat com IA e inbox.
 
 **Próximas etapas:** veja o [`ROADMAP.md`](./ROADMAP.md).  
-**Operação diária:** [`RUNBOOK.md`](./RUNBOOK.md) (subir, admin, health, Sentry, backup).
+**Operação diária:** [`RUNBOOK.md`](./RUNBOOK.md) (subir, admin, health, Sentry, backup).  
+**Sentry:** [`SENTRY.md`](./SENTRY.md).
 
 ## Repositórios (org [projetoALAR](https://github.com/projetoALAR))
 

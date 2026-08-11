@@ -70,17 +70,18 @@ Ordem sugerida nesta fase:
 5. Staging Supabase separado **quando** a URL for pública  
 
 - [x] Runbook curto: subir local, criar admin, o que fazer se `/health` cair
-- [x] **Sentry** (ou similar) no backend e no frontend *(opcional via DSN; ver RUNBOOK)*
+- [x] **Sentry** (ou similar) no backend e no frontend *(código + guia `SENTRY.md`; falta colar DSN)*
 - [x] Logs estruturados na API (request id, user id, rota)
 - [x] Documentar **backup/restore** do Postgres (Supabase ou dump) *(no RUNBOOK)*
 - [x] Secrets só em painel/CI; checklist de rotação (`JWT_SECRET`, `SUPABASE_KEY`) *(no RUNBOOK)*
+- [ ] Colar DSN do Sentry e validar Issues (ver `SENTRY.md`)
 - [ ] Deploy da **API** (ex.: Railway, Fly, Render) com HTTPS
 - [ ] Deploy do **frontend** (ex.: Vercel) apontando para a API
 - [ ] Domínio + CORS (`CORS_ORIGINS`) alinhados ao front real
 - [ ] Separar ambientes **dev / staging / prod** (segundo Supabase) quando houver URL pública
 
 **Critério de pronto:** app acessível por HTTPS (ou staging), health ok, erro de teste aparece no Sentry.  
-**Parcial:** runbook + Sentry + logs prontos; falta deploy HTTPS.
+**Parcial:** runbook + Sentry código/guia + logs prontos; falta DSN + deploy HTTPS.
 
 ---
 
