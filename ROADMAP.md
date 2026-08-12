@@ -144,7 +144,7 @@ Objetivo: útil e controlada, sem “alucinar” como verdade.
 
 Objetivo: mudanças seguras e onboarding de dev rápido.
 
-- [ ] **Swagger/OpenAPI** na API Nest
+- [x] **Swagger/OpenAPI** na API Nest
 - [ ] Cliente tipado no front (gerado ou package compartilhado)
 - [ ] Versionamento `/v1` nas rotas públicas
 - [ ] E2E dos fluxos críticos: login → criar caso → upload → chat

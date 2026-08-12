@@ -59,6 +59,7 @@
 | `c60f4ba` | Backend | E-mails HTML com identidade Alar, `APP_URL` |
 | `375cfe7` | Frontend | Logo, favicon, `AlarLogo`, apple-icon |
 | `054695c` | Frontend | Skip link, sidebar tablet (md+), touch targets, busca em Casos, ações visíveis |
+| `83d7578` | Backend | Swagger/OpenAPI em `/docs` com JWT |
 
 ### Migrations (já aplicadas no Supabase compartilhado)
 
