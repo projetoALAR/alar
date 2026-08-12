@@ -100,7 +100,7 @@ Objetivo: escritório confia em quem viu/alterou o quê; base LGPD.
 - [x] Política de senha reforçada + aviso de senha fraca
 - [x] Bloqueio / cooldown após N logins falhos (além do throttle)
 - [x] **2FA** para `ADMIN` (TOTP)
-- [ ] Revisar RBAC fino: assistente só vê casos **atribuídos** (quando existir responsável)
+- [x] Revisar RBAC fino: assistente só vê casos **atribuídos** (quando existir responsável)
 
 **Critério de pronto:** toda ação sensível gera log; admin consegue exportar/apagar cliente.
 
@@ -110,7 +110,7 @@ Objetivo: escritório confia em quem viu/alterou o quê; base LGPD.
 
 Objetivo: fluxo diário de advogado, não só CRUD.
 
-- [ ] Campo **responsável** (e opcional co-responsável) no processo
+- [x] Campo **responsável** (e opcional co-responsável) no processo
 - [ ] **Timeline** do caso: uploads, mudanças de status, comentários internos, prazos
 - [ ] **Busca global** (nome, CPF, número CNJ, título)
 - [ ] Jobs/notificações de **prazo** (e-mail SMTP + inbox)
@@ -173,9 +173,8 @@ Só quando houver demanda real de mais de um escritório / monetização.
 Fase 0 concluída. Runbook + Sentry + logs da Fase 1 concluídos. Ordem recomendada:
 
 1. **Agora — Fase 1 (resto):** deploy HTTPS da API + frontend + CORS (`CORS_ORIGINS`); staging Supabase só com URL pública  
-2. **Fase 2** — RBAC fino *(disclaimer ✅ · AuditLog ✅ · LGPD ✅ · senha/lockout ✅ · 2FA ✅)*  
-3. **Fase 3** — responsável no caso + timeline (+ busca se der tempo)  
-4. Em paralelo leve: **Fase 4** (citações no chat) e **Swagger** (Fase 5)
+2. **Fase 3** — timeline do caso *(responsável ✅)* (+ busca se der tempo)  
+3. Em paralelo leve: **Fase 4** (citações no chat) e **Swagger** (Fase 5)
 
 ---
 
