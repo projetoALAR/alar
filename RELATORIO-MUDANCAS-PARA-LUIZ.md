@@ -25,7 +25,7 @@
 | 0 — Alinhamento | ✅ |
 | 1 — Confiança / ops | 🟡 falta **deploy HTTPS** (bloqueado até liberar org Railway/Vercel) |
 | 2 — Segurança & LGPD | ✅ (AuditLog, export/anonimizar, senha forte, lockout, 2FA admin, RBAC assistente) |
-| 3 — Produto / UX | 🟡 core ✅ (responsável, timeline, busca, prazos, onboarding); falta branding/a11y |
+| 3 — Produto / UX | ✅ (responsável, timeline, busca, prazos, onboarding, branding, a11y/tablet) |
 | 4 — IA | 🟡 citações de anexos ✅ |
 | 5 — Engenharia | pendente (Swagger, E2E…) |
 | 6 — Escala | depois |
@@ -51,6 +51,14 @@
 | `d1ce933` | Busca global Ctrl+K no header |
 | `5397e11` | Onboarding (tour 1º login) + empty states |
 | `f58b5a9` | UI “Fontes consultadas” nas respostas do chat |
+
+### Branding + a11y/tablet (12/08/2026)
+
+| Commit | Área | O que mudou |
+|--------|------|-------------|
+| `c60f4ba` | Backend | E-mails HTML com identidade Alar, `APP_URL` |
+| `375cfe7` | Frontend | Logo, favicon, `AlarLogo`, apple-icon |
+| `054695c` | Frontend | Skip link, sidebar tablet (md+), touch targets, busca em Casos, ações visíveis |
 
 ### Migrations (já aplicadas no Supabase compartilhado)
 

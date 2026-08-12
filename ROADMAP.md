@@ -16,7 +16,7 @@ Itens já entregues (RBAC, signed URLs, validação, health, CI, Docker, chat ge
 | **0** | Fundação de operação | ✅ concluída |
 | **1** | Confiança (runbook, Sentry, deploy) | 🟡 parcial — falta deploy HTTPS |
 | **2** | Segurança & LGPD | ✅ concluída |
-| **3** | Produto / UX de escritório | 🟡 quase — falta branding / a11y |
+| **3** | Produto / UX de escritório | ✅ core + branding + a11y/tablet |
 | **4** | IA com qualidade | 🟡 iniciada — citações ✅ |
 | **5** | Engenharia (API, testes, stack) | pendente |
 | **6** | Escala / negócio | depois do product-market fit |
@@ -117,8 +117,8 @@ Objetivo: fluxo diário de advogado, não só CRUD.
 - [x] **Busca global** (nome, CPF, número CNJ, título) — `GET /busca` + Ctrl+K
 - [x] Jobs/notificações de **prazo** (e-mail SMTP + inbox) — cron diário 8h
 - [x] Empty states e onboarding (primeiro login / tour curto)
-- [ ] Branding: logo, favicon, e-mails com identidade Alar
-- [ ] Revisão de acessibilidade e tablet
+- [x] Branding: logo, favicon, e-mails com identidade Alar
+- [x] Revisão de acessibilidade e tablet
 - [ ] Atribuição de tarefas / checklist por caso (opcional nesta fase)
 
 **Critério de pronto:** abrir um caso mostra histórico + responsável; busca encontra em &lt; 2 s. ✅ (core)
@@ -190,7 +190,7 @@ Migrations aplicadas no Supabase compartilhado:
 ## Próximas 2–4 semanas (foco sugerido)
 
 1. **Bloqueador — Fase 1:** deploy HTTPS da API + frontend + CORS (`CORS_ORIGINS`) assim que o Luiz liberar a org  
-2. **Fase 3 resto:** branding (logo/favicon) e/ou a11y tablet  
+2. **Fase 4:** limite de tokens IA, feedback nas respostas  
 3. **Fase 4 / 5:** limite de tokens da IA **ou** Swagger  
 
 ---
