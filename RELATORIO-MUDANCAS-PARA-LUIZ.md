@@ -26,7 +26,7 @@
 | 1 — Confiança / ops | 🟡 falta **deploy HTTPS** (bloqueado até liberar org Railway/Vercel) |
 | 2 — Segurança & LGPD | ✅ (AuditLog, export/anonimizar, senha forte, lockout, 2FA admin, RBAC assistente) |
 | 3 — Produto / UX | ✅ (responsável, timeline, busca, prazos, onboarding, branding, a11y/tablet) |
-| 4 — IA | 🟡 quota + feedback ✅; falta exportar conversa, rascunho |
+| 4 — IA | 🟡 quota + feedback + export ✅; falta rascunho |
 | 5 — Engenharia | pendente (Swagger, E2E…) |
 | 6 — Escala | depois |
 
@@ -62,6 +62,8 @@
 | `83d7578` | Backend | Swagger/OpenAPI em `/docs` com JWT |
 | `d4e47c8` | Backend | Limite diário de tokens + feedback + métricas IA |
 | `8bd2c53` | Frontend | UI feedback útil/não útil + quota no chat |
+| `0773e4a` | Backend | Exportar conversa Markdown/JSON |
+| `852fd10` | Frontend | Botão exportar no chat geral e do caso |
 
 ### Migrations (já aplicadas no Supabase compartilhado)
 

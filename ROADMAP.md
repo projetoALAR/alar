@@ -132,7 +132,7 @@ Objetivo: útil e controlada, sem “alucinar” como verdade.
 - [x] Respostas do chat do caso **citando anexo** (arquivo + trecho quando possível)
 - [x] Limite de **tokens/custo por usuário/dia**
 - [x] Feedback “útil / não útil” nas respostas da IA
-- [ ] Exportar conversa
+- [x] Exportar conversa
 - [ ] Modo rascunho (petição/contrato) com **revisão humana** obrigatória na UI
 - [ ] Prompt + disclaimer: não inventar jurisprudência / números de processo
 - [x] Métricas básicas de uso da IA (admin) — `GET /chat/metricas`
