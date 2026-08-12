@@ -94,8 +94,8 @@ Objetivo: escritório confia em quem viu/alterou o quê; base LGPD.
 
 - [x] Tabela **`AuditLog`**: criar/editar/excluir em cliente, processo, documento, usuário
 - [x] UI simples de auditoria (admin) — filtros por entidade/data/usuário
-- [ ] **Exportar dados** de um cliente (JSON/ZIP) sob pedido
-- [ ] **Excluir / anonimizar** cliente e vínculos (fluxo LGPD)
+- [x] **Exportar dados** de um cliente (JSON/ZIP) sob pedido
+- [x] **Excluir / anonimizar** cliente e vínculos (fluxo LGPD)
 - [x] Disclaimer fixo: IA não substitui advogado (chat + login)
 - [ ] Política de senha reforçada + aviso de senha fraca
 - [ ] Bloqueio / cooldown após N logins falhos (além do throttle)
@@ -173,7 +173,7 @@ Só quando houver demanda real de mais de um escritório / monetização.
 Fase 0 concluída. Runbook + Sentry + logs da Fase 1 concluídos. Ordem recomendada:
 
 1. **Agora — Fase 1 (resto):** deploy HTTPS da API + frontend + CORS (`CORS_ORIGINS`); staging Supabase só com URL pública  
-2. **Fase 2** — export/delete LGPD *(disclaimer IA ✅ · AuditLog ✅)*  
+2. **Fase 2** — senha forte + cooldown de login *(disclaimer ✅ · AuditLog ✅ · LGPD export/anonimizar ✅)*  
 3. **Fase 3** — responsável no caso + timeline (+ busca se der tempo)  
 4. Em paralelo leve: **Fase 4** (citações no chat) e **Swagger** (Fase 5)
 
