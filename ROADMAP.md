@@ -5,18 +5,20 @@ Itens já entregues (RBAC, signed URLs, validação, health, CI, Docker, chat ge
 
 **Como usar:** marque `[x]` quando concluir; mantenha a ordem das fases salvo urgência de negócio.
 
+**Última atualização:** 12/08/2026
+
 ---
 
 ## Visão rápida
 
-| Fase | Foco | Horizonte sugerido |
-|------|------|--------------------|
+| Fase | Foco | Status |
+|------|------|--------|
 | **0** | Fundação de operação | ✅ concluída |
-| **1** | Confiança (runbook, Sentry, deploy) | 1–2 semanas ← atual |
-| **2** | Segurança & LGPD | 2–3 semanas |
-| **3** | Produto / UX de escritório | 2–4 semanas |
-| **4** | IA com qualidade | 2 semanas |
-| **5** | Engenharia (API, testes, stack) | contínuo |
+| **1** | Confiança (runbook, Sentry, deploy) | 🟡 parcial — falta deploy HTTPS |
+| **2** | Segurança & LGPD | ✅ concluída |
+| **3** | Produto / UX de escritório | 🟡 quase — falta branding / a11y |
+| **4** | IA com qualidade | 🟡 iniciada — citações ✅ |
+| **5** | Engenharia (API, testes, stack) | pendente |
 | **6** | Escala / negócio | depois do product-market fit |
 
 ---
@@ -34,16 +36,16 @@ Itens já entregues (RBAC, signed URLs, validação, health, CI, Docker, chat ge
 
 **Bloqueadores para mostrar a um cliente** (obrigatório antes da demo externa)
 
-| Obrigatório | Motivo |
-|-------------|--------|
-| HTTPS (front + API) | confiança básica |
-| Login + RBAC ok | não vazar dados |
-| Disclaimer da IA | risco jurídico |
-| Mobile usável | demo no celular |
-| Health + como criar usuário documentado | não travar na demo |
-| Bucket privado + `service_role` | documentos sensíveis |
+| Obrigatório | Motivo | Status |
+|-------------|--------|--------|
+| HTTPS (front + API) | confiança básica | ⏳ aguardando Owner/apps na org |
+| Login + RBAC ok | não vazar dados | ✅ |
+| Disclaimer da IA | risco jurídico | ✅ |
+| Mobile usável | demo no celular | ✅ |
+| Health + como criar usuário documentado | não travar na demo | ✅ |
+| Bucket privado + `service_role` | documentos sensíveis | ✅ |
 
-**Não bloqueia demo:** 2FA, multi-tenant, Stripe, busca global, Sentry (desejável, mas demo possível sem).
+**Não bloqueia demo:** 2FA, multi-tenant, Stripe, Sentry (desejável, mas demo possível sem). *(Busca global já entregue.)*
 
 **Time**
 - Izack e Luiz fazem **tudo juntos** — sem dono exclusivo por fase.
@@ -58,11 +60,11 @@ Itens já entregues (RBAC, signed URLs, validação, health, CI, Docker, chat ge
 
 ---
 
-## Fase 1 — Confiança e operação ← **agora**
+## Fase 1 — Confiança e operação ← **bloqueador restante: deploy**
 
 Objetivo: o sistema sobe, falha de forma visível e dá para recuperar.
 
-**Progresso (10/08/2026):** runbook + Sentry + logs ✅ · **próximo: deploy HTTPS**
+**Progresso (12/08/2026):** runbook + Sentry + logs ✅ · **próximo: deploy HTTPS** (depende do Luiz liberar Owner ou instalar Railway/Vercel na org)
 
 Ordem sugerida nesta fase:
 1. ~~Runbook curto~~ ✅  
@@ -88,7 +90,7 @@ Ordem sugerida nesta fase:
 
 ---
 
-## Fase 2 — Segurança e compliance
+## Fase 2 — Segurança e compliance ✅
 
 Objetivo: escritório confia em quem viu/alterou o quê; base LGPD.
 
@@ -102,39 +104,39 @@ Objetivo: escritório confia em quem viu/alterou o quê; base LGPD.
 - [x] **2FA** para `ADMIN` (TOTP)
 - [x] Revisar RBAC fino: assistente só vê casos **atribuídos** (quando existir responsável)
 
-**Critério de pronto:** toda ação sensível gera log; admin consegue exportar/apagar cliente.
+**Critério de pronto:** toda ação sensível gera log; admin consegue exportar/apagar cliente. ✅
 
 ---
 
-## Fase 3 — Produto e UX profissional
+## Fase 3 — Produto e UX profissional 🟡
 
 Objetivo: fluxo diário de advogado, não só CRUD.
 
 - [x] Campo **responsável** (e opcional co-responsável) no processo
-- [ ] **Timeline** do caso: uploads, mudanças de status, comentários internos, prazos
-- [ ] **Busca global** (nome, CPF, número CNJ, título)
-- [ ] Jobs/notificações de **prazo** (e-mail SMTP + inbox)
-- [ ] Empty states e onboarding (primeiro login / tour curto)
+- [x] **Timeline** do caso: uploads, mudanças de status, comentários internos, prazos
+- [x] **Busca global** (nome, CPF, número CNJ, título) — `GET /busca` + Ctrl+K
+- [x] Jobs/notificações de **prazo** (e-mail SMTP + inbox) — cron diário 8h
+- [x] Empty states e onboarding (primeiro login / tour curto)
 - [ ] Branding: logo, favicon, e-mails com identidade Alar
 - [ ] Revisão de acessibilidade e tablet
 - [ ] Atribuição de tarefas / checklist por caso (opcional nesta fase)
 
-**Critério de pronto:** abrir um caso mostra histórico + responsável; busca encontra em &lt; 2 s.
+**Critério de pronto:** abrir um caso mostra histórico + responsável; busca encontra em &lt; 2 s. ✅ (core)
 
 ---
 
-## Fase 4 — IA com qualidade de escritório
+## Fase 4 — IA com qualidade de escritório 🟡
 
 Objetivo: útil e controlada, sem “alucinar” como verdade.
 
-- [ ] Respostas do chat do caso **citando anexo** (arquivo + trecho quando possível)
+- [x] Respostas do chat do caso **citando anexo** (arquivo + trecho quando possível)
 - [ ] Limite de **tokens/custo por usuário/dia**
 - [ ] Exportar conversa; feedback “útil / não útil”
 - [ ] Modo rascunho (petição/contrato) com **revisão humana** obrigatória na UI
 - [ ] Prompt + disclaimer: não inventar jurisprudência / números de processo
 - [ ] Métricas básicas de uso da IA (admin)
 
-**Critério de pronto:** chat do caso sempre indica fontes usadas ou diz que não achou no anexo.
+**Critério de pronto:** chat do caso sempre indica fontes usadas ou diz que não achou no anexo. ✅ (citações entregues)
 
 ---
 
@@ -168,13 +170,28 @@ Só quando houver demanda real de mais de um escritório / monetização.
 
 ---
 
+## Entregas recentes (12/08/2026) — branch `feat/integracao-api`
+
+| Item | Backend | Frontend |
+|------|---------|----------|
+| Timeline + comentários internos | `2af15c8` | `20c1671` |
+| Busca global | `a836d03` | `d1ce933` |
+| Lembretes de prazo (cron 8h) | `9599f2f` | — |
+| Onboarding + empty states | — | `5397e11` |
+| Citações de anexos no chat | `2303b23` | `f58b5a9` |
+
+Migrations aplicadas no Supabase compartilhado:
+- `20260812160000_add_processo_comentario`
+- `20260812170000_add_mensagem_fontes`
+*(anteriores: responsável, TOTP, etc.)*
+
+---
+
 ## Próximas 2–4 semanas (foco sugerido)
 
-Fase 0 concluída. Runbook + Sentry + logs da Fase 1 concluídos. Ordem recomendada:
-
-1. **Agora — Fase 1 (resto):** deploy HTTPS da API + frontend + CORS (`CORS_ORIGINS`); staging Supabase só com URL pública  
-2. **Fase 3** — timeline do caso *(responsável ✅)* (+ busca se der tempo)  
-3. Em paralelo leve: **Fase 4** (citações no chat) e **Swagger** (Fase 5)
+1. **Bloqueador — Fase 1:** deploy HTTPS da API + frontend + CORS (`CORS_ORIGINS`) assim que o Luiz liberar a org  
+2. **Fase 3 resto:** branding (logo/favicon) e/ou a11y tablet  
+3. **Fase 4 / 5:** limite de tokens da IA **ou** Swagger  
 
 ---
 
