@@ -130,11 +130,12 @@ Objetivo: fluxo diário de advogado, não só CRUD.
 Objetivo: útil e controlada, sem “alucinar” como verdade.
 
 - [x] Respostas do chat do caso **citando anexo** (arquivo + trecho quando possível)
-- [ ] Limite de **tokens/custo por usuário/dia**
-- [ ] Exportar conversa; feedback “útil / não útil”
+- [x] Limite de **tokens/custo por usuário/dia**
+- [x] Feedback “útil / não útil” nas respostas da IA
+- [ ] Exportar conversa
 - [ ] Modo rascunho (petição/contrato) com **revisão humana** obrigatória na UI
 - [ ] Prompt + disclaimer: não inventar jurisprudência / números de processo
-- [ ] Métricas básicas de uso da IA (admin)
+- [x] Métricas básicas de uso da IA (admin) — `GET /chat/metricas`
 
 **Critério de pronto:** chat do caso sempre indica fontes usadas ou diz que não achou no anexo. ✅ (citações entregues)
 
