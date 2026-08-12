@@ -17,7 +17,7 @@ Itens já entregues (RBAC, signed URLs, validação, health, CI, Docker, chat ge
 | **1** | Confiança (runbook, Sentry, deploy) | 🟡 parcial — falta deploy HTTPS |
 | **2** | Segurança & LGPD | ✅ concluída |
 | **3** | Produto / UX de escritório | ✅ core + branding + a11y/tablet |
-| **4** | IA com qualidade | 🟡 iniciada — citações ✅ |
+| **4** | IA com qualidade | ✅ core (citações, quota, feedback, export, rascunho+revisão) |
 | **5** | Engenharia (API, testes, stack) | pendente |
 | **6** | Escala / negócio | depois do product-market fit |
 
@@ -133,8 +133,8 @@ Objetivo: útil e controlada, sem “alucinar” como verdade.
 - [x] Limite de **tokens/custo por usuário/dia**
 - [x] Feedback “útil / não útil” nas respostas da IA
 - [x] Exportar conversa
-- [ ] Modo rascunho (petição/contrato) com **revisão humana** obrigatória na UI
-- [ ] Prompt + disclaimer: não inventar jurisprudência / números de processo
+- [x] Modo rascunho (petição/contrato) com **revisão humana** obrigatória na UI
+- [x] Prompt + disclaimer: não inventar jurisprudência / números de processo
 - [x] Métricas básicas de uso da IA (admin) — `GET /chat/metricas`
 
 **Critério de pronto:** chat do caso sempre indica fontes usadas ou diz que não achou no anexo. ✅ (citações entregues)
