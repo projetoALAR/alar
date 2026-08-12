@@ -69,7 +69,7 @@ npm run dev
 
 App: `http://localhost:3000`
 
-### 3. Docker Compose (API + Postgres local)
+### 3. Docker Compose (API + Postgres + frontend)
 
 Na raiz deste projeto:
 
@@ -79,8 +79,13 @@ docker compose up --build
 
 - Postgres: `localhost:5432`
 - API: `localhost:3001`
+- Frontend: `localhost:3000` (serviço `web`)
 
-Ajuste `SUPABASE_*` no compose / `.env` para Storage. O frontend continua rodando via `npm run dev` (ou adicione o serviço web depois).
+Admin bootstrap do Compose: `admin@alar.com.br` / `AlarAdminChangeMe1` (troque em produção).
+
+Ajuste `SUPABASE_*` e `OPENAI_API_KEY` no compose / `.env` da raiz para Storage e IA real. Sem OpenAI, o Compose sobe com `CHAT_ALLOW_MOCK=true`.
+
+Para desenvolvimento com hot-reload, use `npm run start:dev` (API) + `npm run dev` (front) em vez do Compose.
 
 ## Papéis (RBAC)
 
@@ -106,6 +111,7 @@ Uploads vão para o bucket Supabase `documentos`. A API devolve **URLs assinadas
 |------|---------|--------|
 | backend | `npm run start:dev` | API em watch |
 | backend | `npm test` | testes unitários |
+| backend | `npm run test:e2e` | E2E (health + fluxo crítico) |
 | backend | `npm run lint` | ESLint |
 | frontend | `npm run dev` | Next.js |
 | frontend | `npm run build` | build de produção |

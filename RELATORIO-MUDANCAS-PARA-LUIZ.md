@@ -27,7 +27,7 @@
 | 2 — Segurança & LGPD | ✅ (AuditLog, export/anonimizar, senha forte, lockout, 2FA admin, RBAC assistente) |
 | 3 — Produto / UX | ✅ (responsável, timeline, busca, prazos, onboarding, branding, a11y/tablet) |
 | 4 — IA | ✅ core (citações, quota, feedback, export, rascunho+revisão, anti-alucinação) |
-| 5 — Engenharia | pendente (Swagger, E2E…) |
+| 5 — Engenharia | 🟡 Swagger + E2E crítico + compose (`db`+`api`+`web`) |
 | 6 — Escala | depois |
 
 ---
@@ -66,6 +66,8 @@
 | `852fd10` | Frontend | Botão exportar no chat geral e do caso |
 | `2c5767a` | Backend | Rascunho IA: revisão humana obrigatória + quota + anti-alucinação |
 | `76c4595` | Frontend | Checkbox de revisão humana + disclaimer reforçado |
+| `160e236` | Backend | E2E fluxo crítico + CI com Postgres |
+| `de6e5d6` | Frontend | Dockerfile standalone para Compose |
 
 ### Migrations (já aplicadas no Supabase compartilhado)
 

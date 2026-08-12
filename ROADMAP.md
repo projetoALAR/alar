@@ -18,7 +18,7 @@ Itens já entregues (RBAC, signed URLs, validação, health, CI, Docker, chat ge
 | **2** | Segurança & LGPD | ✅ concluída |
 | **3** | Produto / UX de escritório | ✅ core + branding + a11y/tablet |
 | **4** | IA com qualidade | ✅ core (citações, quota, feedback, export, rascunho+revisão) |
-| **5** | Engenharia (API, testes, stack) | pendente |
+| **5** | Engenharia (API, testes, stack) | 🟡 Swagger + E2E + compose web |
 | **6** | Escala / negócio | depois do product-market fit |
 
 ---
@@ -148,10 +148,10 @@ Objetivo: mudanças seguras e onboarding de dev rápido.
 - [x] **Swagger/OpenAPI** na API Nest
 - [ ] Cliente tipado no front (gerado ou package compartilhado)
 - [ ] Versionamento `/v1` nas rotas públicas
-- [ ] E2E dos fluxos críticos: login → criar caso → upload → chat
+- [x] E2E dos fluxos críticos: login → criar caso → upload → chat
 - [ ] Coverage mínimo no CI (ex.: back &gt; 60% nos módulos core)
 - [ ] Preview de PR (Vercel / ambiente efêmero)
-- [ ] Serviço **web** no `docker-compose` (stack completa com um comando)
+- [x] Serviço **web** no `docker-compose` (stack completa com um comando)
 - [ ] Atualizar submodule do repo `alar` quando front/back avançarem
 
 **Critério de pronto:** PR nova quebra e2e → CI vermelho; compose sobe API+DB(+web).
