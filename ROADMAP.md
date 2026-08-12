@@ -77,8 +77,8 @@ Ordem sugerida nesta fase:
 - [x] Documentar **backup/restore** do Postgres (Supabase ou dump) *(no RUNBOOK)*
 - [x] Secrets só em painel/CI; checklist de rotação (`JWT_SECRET`, `SUPABASE_KEY`) *(no RUNBOOK)*
 - [x] Colar DSN do Sentry *(local; não commitado)* + Issue validada; flags de teste desligadas
-- [ ] Deploy da **API** (ex.: Railway, Fly, Render) com HTTPS
-- [ ] Deploy do **frontend** (ex.: Vercel) apontando para a API
+- [ ] Deploy da **API** no Railway com HTTPS — guia [`DEPLOY.md`](./DEPLOY.md)
+- [ ] Deploy do **frontend** no Vercel apontando para a API
 - [ ] Domínio + CORS (`CORS_ORIGINS`) alinhados ao front real
 - [ ] Separar ambientes **dev / staging / prod** (segundo Supabase) quando houver URL pública
 - [ ] (Opcional, antes do deploy) Smoke de **backup real** do Postgres — ver RUNBOOK §6
@@ -190,6 +190,7 @@ Fase 0 concluída. Runbook + Sentry + logs da Fase 1 concluídos. Ordem recomend
 ## Referências
 
 - Runbook (operação): [`RUNBOOK.md`](./RUNBOOK.md)
+- Deploy HTTPS: [`DEPLOY.md`](./DEPLOY.md)
 - Sentry: [`SENTRY.md`](./SENTRY.md)
 - Relatório das mudanças recentes: [`RELATORIO-MUDANCAS-PARA-LUIZ.md`](./RELATORIO-MUDANCAS-PARA-LUIZ.md)
 - Setup atual: [`README.md`](./README.md)

@@ -16,7 +16,7 @@ Sem secrets neste arquivo — use `.env` / `.env.local` / painel do provedor.
 | 7 | Rotação de secrets | Checklist pronto; só usar se precisar rotacionar |
 | 8 | Desligar servidores | OK (procedimento) |
 | — | Docker Compose (opcional) | Não usado no fluxo diário |
-| — | Deploy HTTPS (Fase 1 roadmap) | Pendente |
+| — | Deploy HTTPS (Fase 1 roadmap) | Em andamento — ver [`DEPLOY.md`](./DEPLOY.md) |
 
 ---
 
@@ -200,8 +200,8 @@ Encerrar os terminais `npm run start:dev` / `npm run dev`, ou liberar as portas 
 
 ## Próximos passos sugeridos
 
-1. Testar um backup real (§6)
-2. No roadmap Fase 1: deploy HTTPS da API + frontend
+1. Deploy HTTPS — guia [`DEPLOY.md`](./DEPLOY.md) (Railway API + Vercel front)
+2. Testar um backup real (§6)
 3. (Opcional) Resolver/ignorar issue ALAR-1 no Sentry — era só o teste
 
 ---
@@ -210,6 +210,7 @@ Encerrar os terminais `npm run start:dev` / `npm run dev`, ou liberar as portas 
 
 - Setup geral: [`README.md`](./README.md)
 - Roadmap: [`ROADMAP.md`](./ROADMAP.md)
+- Deploy HTTPS: [`DEPLOY.md`](./DEPLOY.md)
 - Sentry: [`SENTRY.md`](./SENTRY.md)
 - Relatório de mudanças: [`RELATORIO-MUDANCAS-PARA-LUIZ.md`](./RELATORIO-MUDANCAS-PARA-LUIZ.md)
 - Org: [github.com/projetoALAR](https://github.com/projetoALAR)

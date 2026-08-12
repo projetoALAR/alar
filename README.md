@@ -4,6 +4,7 @@ Sistema full-stack para gestão de escritório jurídico: clientes, casos/proces
 
 **Próximas etapas:** veja o [`ROADMAP.md`](./ROADMAP.md).  
 **Operação diária:** [`RUNBOOK.md`](./RUNBOOK.md) (subir, admin, health, Sentry, backup).  
+**Deploy HTTPS:** [`DEPLOY.md`](./DEPLOY.md) (Railway + Vercel).  
 **Sentry:** [`SENTRY.md`](./SENTRY.md).
 
 ## Repositórios (org [projetoALAR](https://github.com/projetoALAR))
