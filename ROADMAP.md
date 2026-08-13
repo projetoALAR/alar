@@ -122,6 +122,7 @@ Objetivo: fluxo diário de advogado, não só CRUD.
 - [x] Atribuição de tarefas / checklist por caso
 - [x] Ficha de cliente **PF/PJ** (CNPJ, endereço)
 - [x] Página do caso com URL própria (`/casos/[id]`)
+- [x] Andamento **manual** (além da sincronização DataJud)
 
 **Critério de pronto:** abrir um caso mostra histórico + responsável; busca encontra em &lt; 2 s. ✅ (core)
 
