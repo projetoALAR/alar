@@ -119,7 +119,7 @@ Objetivo: fluxo diário de advogado, não só CRUD.
 - [x] Empty states e onboarding (primeiro login / tour curto)
 - [x] Branding: logo, favicon, e-mails com identidade Alar
 - [x] Revisão de acessibilidade e tablet
-- [ ] Atribuição de tarefas / checklist por caso (opcional nesta fase)
+- [x] Atribuição de tarefas / checklist por caso
 
 **Critério de pronto:** abrir um caso mostra histórico + responsável; busca encontra em &lt; 2 s. ✅ (core)
 
