@@ -95,11 +95,11 @@ Para desenvolvimento com hot-reload, use `npm run start:dev` (API) + `npm run de
 | `ADVOGADO` | CRUD clientes/casos/docs |
 | `ASSISTENTE` | Leitura + upload de docs / compromissos |
 
-Com `AUTH_ALLOW_PUBLIC_REGISTER=false`, crie usuários em **Configurações** (admin) ou via `POST /auth/usuarios`.
+Com `AUTH_ALLOW_PUBLIC_REGISTER=false`, crie usuários em **Configurações** (admin) ou via `POST /v1/auth/usuarios`.
 
 ## Health
 
-`GET /health` — status da API e do banco.
+`GET /health` — status da API e do banco (sem versão). Rotas de negócio: `/v1/...` (login, clientes, casos, etc.).
 
 ## Documentos
 

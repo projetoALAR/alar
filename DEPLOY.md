@@ -97,7 +97,7 @@ Repo: [projetoALAR/workspace-juridico-frontend](https://github.com/projetoALAR/w
 
 4. Deploy. Anote a URL `https://….vercel.app`
 
-O browser fala só com o Next (`/api/backend` e `/api/auth/*`). O cookie `alar_token` fica httpOnly + `secure` em produção.
+O browser fala só com o Next (`/api/backend/v1` e `/api/auth/*`). O cookie `alar_token` fica httpOnly + `secure` em produção.
 
 ---
 

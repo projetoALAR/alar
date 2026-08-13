@@ -147,7 +147,7 @@ Objetivo: mudanças seguras e onboarding de dev rápido.
 
 - [x] **Swagger/OpenAPI** na API Nest
 - [x] Cliente tipado no front (schemas OpenAPI: clientes, processos, documentos, auth)
-- [ ] Versionamento `/v1` nas rotas públicas
+- [x] Versionamento `/v1` nas rotas públicas
 - [x] E2E dos fluxos críticos: login → criar caso → upload → chat
 - [x] Coverage mínimo no CI (auth, processos, chat, documentos, clientes, casos-acesso ≥ 60% linhas/statements)
 - [ ] Preview de PR (Vercel / ambiente efêmero)
@@ -191,8 +191,7 @@ Migrations aplicadas no Supabase compartilhado:
 ## Próximas 2–4 semanas (foco sugerido)
 
 1. **Bloqueador — Fase 1:** deploy HTTPS da API + frontend + CORS (`CORS_ORIGINS`) assim que o Luiz liberar a org  
-2. **Fase 5:** versionamento `/v1` nas rotas públicas  
-3. Preview de PR (Vercel) quando o Luiz liberar  
+2. Preview de PR (Vercel) quando o Luiz liberar  
 
 ---
 

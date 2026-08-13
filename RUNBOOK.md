@@ -84,7 +84,7 @@ Sem senha válida → admin **não** é criado (log de aviso na API).
 Com cadastro público desligado:
 1. Faça login com o admin (valores no `.env` do backend)
 2. Em **Configurações** (admin), crie os demais usuários  
-   ou `POST /auth/usuarios` com JWT de admin
+   ou `POST /v1/auth/usuarios` com JWT de admin
 
 ---
 
