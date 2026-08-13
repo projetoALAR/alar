@@ -18,7 +18,7 @@ Itens já entregues (RBAC, signed URLs, validação, health, CI, Docker, chat ge
 | **2** | Segurança & LGPD | ✅ concluída |
 | **3** | Produto / UX de escritório | ✅ core + branding + a11y/tablet |
 | **4** | IA com qualidade | ✅ core (citações, quota, feedback, export, rascunho+revisão) |
-| **5** | Engenharia (API, testes, stack) | 🟡 Swagger + E2E + compose web + coverage CI |
+| **5** | Engenharia (API, testes, stack) | 🟡 Swagger + E2E + compose + coverage + tipos OpenAPI |
 | **6** | Escala / negócio | depois do product-market fit |
 
 ---
@@ -146,7 +146,7 @@ Objetivo: útil e controlada, sem “alucinar” como verdade.
 Objetivo: mudanças seguras e onboarding de dev rápido.
 
 - [x] **Swagger/OpenAPI** na API Nest
-- [ ] Cliente tipado no front (gerado ou package compartilhado)
+- [x] Cliente tipado no front (schemas OpenAPI: clientes, processos, documentos, auth)
 - [ ] Versionamento `/v1` nas rotas públicas
 - [x] E2E dos fluxos críticos: login → criar caso → upload → chat
 - [x] Coverage mínimo no CI (auth, processos, chat, documentos, clientes, casos-acesso ≥ 60% linhas/statements)
@@ -191,8 +191,8 @@ Migrations aplicadas no Supabase compartilhado:
 ## Próximas 2–4 semanas (foco sugerido)
 
 1. **Bloqueador — Fase 1:** deploy HTTPS da API + frontend + CORS (`CORS_ORIGINS`) assim que o Luiz liberar a org  
-2. **Fase 5:** cliente tipado no front (a partir do Swagger)  
-3. **Fase 5:** versionamento `/v1` nas rotas públicas  
+2. **Fase 5:** versionamento `/v1` nas rotas públicas  
+3. Preview de PR (Vercel) quando o Luiz liberar  
 
 ---
 
