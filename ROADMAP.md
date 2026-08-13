@@ -5,7 +5,7 @@ Itens já entregues (RBAC, signed URLs, validação, health, CI, Docker, chat ge
 
 **Como usar:** marque `[x]` quando concluir; mantenha a ordem das fases salvo urgência de negócio.
 
-**Última atualização:** 12/08/2026
+**Última atualização:** 13/08/2026
 
 ---
 
@@ -18,7 +18,7 @@ Itens já entregues (RBAC, signed URLs, validação, health, CI, Docker, chat ge
 | **2** | Segurança & LGPD | ✅ concluída |
 | **3** | Produto / UX de escritório | ✅ core + branding + a11y/tablet |
 | **4** | IA com qualidade | ✅ core (citações, quota, feedback, export, rascunho+revisão) |
-| **5** | Engenharia (API, testes, stack) | 🟡 Swagger + E2E + compose web |
+| **5** | Engenharia (API, testes, stack) | 🟡 Swagger + E2E + compose web + coverage CI |
 | **6** | Escala / negócio | depois do product-market fit |
 
 ---
@@ -149,7 +149,7 @@ Objetivo: mudanças seguras e onboarding de dev rápido.
 - [ ] Cliente tipado no front (gerado ou package compartilhado)
 - [ ] Versionamento `/v1` nas rotas públicas
 - [x] E2E dos fluxos críticos: login → criar caso → upload → chat
-- [ ] Coverage mínimo no CI (ex.: back &gt; 60% nos módulos core)
+- [x] Coverage mínimo no CI (auth, processos, chat, documentos, clientes, casos-acesso ≥ 60% linhas/statements)
 - [ ] Preview de PR (Vercel / ambiente efêmero)
 - [x] Serviço **web** no `docker-compose` (stack completa com um comando)
 - [ ] Atualizar submodule do repo `alar` quando front/back avançarem
@@ -191,8 +191,8 @@ Migrations aplicadas no Supabase compartilhado:
 ## Próximas 2–4 semanas (foco sugerido)
 
 1. **Bloqueador — Fase 1:** deploy HTTPS da API + frontend + CORS (`CORS_ORIGINS`) assim que o Luiz liberar a org  
-2. **Fase 4:** limite de tokens IA, feedback nas respostas  
-3. **Fase 4 / 5:** limite de tokens da IA **ou** Swagger  
+2. **Fase 5:** cliente tipado no front (a partir do Swagger)  
+3. **Fase 5:** versionamento `/v1` nas rotas públicas  
 
 ---
 
