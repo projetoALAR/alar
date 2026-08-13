@@ -120,6 +120,8 @@ Objetivo: fluxo diário de advogado, não só CRUD.
 - [x] Branding: logo, favicon, e-mails com identidade Alar
 - [x] Revisão de acessibilidade e tablet
 - [x] Atribuição de tarefas / checklist por caso
+- [x] Ficha de cliente **PF/PJ** (CNPJ, endereço)
+- [x] Página do caso com URL própria (`/casos/[id]`)
 
 **Critério de pronto:** abrir um caso mostra histórico + responsável; busca encontra em &lt; 2 s. ✅ (core)
 
