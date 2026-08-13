@@ -101,7 +101,7 @@ Objetivo: escritório confia em quem viu/alterou o quê; base LGPD.
 - [x] Disclaimer fixo: IA não substitui advogado (chat + login)
 - [x] Política de senha reforçada + aviso de senha fraca
 - [x] Bloqueio / cooldown após N logins falhos (além do throttle)
-- [x] **2FA** para `ADMIN` (TOTP)
+- [x] **2FA** para `ADMIN` e `ADVOGADO` (TOTP)
 - [x] Revisar RBAC fino: assistente só vê casos **atribuídos** (quando existir responsável)
 
 **Critério de pronto:** toda ação sensível gera log; admin consegue exportar/apagar cliente. ✅
@@ -124,6 +124,12 @@ Objetivo: fluxo diário de advogado, não só CRUD.
 - [x] Página do caso com URL própria (`/casos/[id]`)
 - [x] Andamento **manual** (além da sincronização DataJud)
 - [x] Ajuda do produto (sem links genéricos) + skeletons nas listas principais
+- [x] URLs em português (`/casos`, `/clientes`, `/agenda`…) com redirect dos caminhos antigos
+- [x] `error.tsx` / `not-found.tsx`
+- [x] Ficha do cliente (`/clientes/[id]`) + aviso DataJud na UI + agenda com link ao caso
+- [x] Aba **Prazos** no caso: prazo principal, compromissos, tarefas e registro de intimação
+- [x] PDF da **capa do processo** (`GET /processos/:id/capa` + botão no caso)
+- [x] Relatórios com **filtro** (status, prazo, responsável) e CSV do recorte
 
 **Critério de pronto:** abrir um caso mostra histórico + responsável; busca encontra em &lt; 2 s. ✅ (core)
 
@@ -156,7 +162,7 @@ Objetivo: mudanças seguras e onboarding de dev rápido.
 - [x] Coverage mínimo no CI (auth, processos, chat, documentos, clientes, casos-acesso ≥ 60% linhas/statements)
 - [ ] Preview de PR (Vercel / ambiente efêmero)
 - [x] Serviço **web** no `docker-compose` (stack completa com um comando)
-- [ ] Atualizar submodule do repo `alar` quando front/back avançarem
+- [x] Atualizar submodule do repo `alar` quando front/back avançarem
 
 **Critério de pronto:** PR nova quebra e2e → CI vermelho; compose sobe API+DB(+web).
 
@@ -175,7 +181,7 @@ Só quando houver demanda real de mais de um escritório / monetização.
 
 ---
 
-## Entregas recentes (12/08/2026) — branch `feat/integracao-api`
+## Entregas recentes (13/08/2026) — branch `feat/integracao-api`
 
 | Item | Backend | Frontend |
 |------|---------|----------|
@@ -184,6 +190,11 @@ Só quando houver demanda real de mais de um escritório / monetização.
 | Lembretes de prazo (cron 8h) | `9599f2f` | — |
 | Onboarding + empty states | — | `5397e11` |
 | Citações de anexos no chat | `2303b23` | `f58b5a9` |
+| URLs em português + ficha do cliente | `e49ca27` | `4c7ac06` |
+| Aba Prazos + intimação | `ca31e54` | `94cbd34` |
+| Capa PDF do processo | `fe632e0` / `bb286e2` | `9187cdd` |
+| Relatórios filtráveis | — | `c22eaee` |
+| 2FA para advogado | `6b126b9` | `76a48b8` |
 
 Migrations aplicadas no Supabase compartilhado:
 - `20260812160000_add_processo_comentario`
