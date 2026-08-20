@@ -52,6 +52,7 @@ Repo: [projetoALAR/workspace-juridico-backend](https://github.com/projetoALAR/wo
 | `JWT_SECRET` | string longa aleatória (**nova**, não a de local) |
 | `JWT_EXPIRES_IN` | `7d` |
 | `CORS_ORIGINS` | `https://localhost` temporário; depois a URL do Vercel |
+| `APP_URL` | URL HTTPS do front (links de convite / reset de senha); depois do Vercel |
 | `AUTH_ALLOW_PUBLIC_REGISTER` | `false` |
 | `AUTH_ADMIN_EMAIL` | `admin@alar.com.br` |
 | `AUTH_ADMIN_PASSWORD` | senha forte (só cria admin se a tabela `Usuario` estiver vazia) |
@@ -63,8 +64,14 @@ Repo: [projetoALAR/workspace-juridico-backend](https://github.com/projetoALAR/wo
 | `SENTRY_DSN` | o DSN já usado no local |
 | `SENTRY_ENVIRONMENT` | `production` |
 | `SENTRY_ENABLE_TEST_ENDPOINT` | `false` |
+| `SWAGGER_ENABLED` | `false` (recomendado em produção) |
+| `CHAT_ALLOW_MOCK` | `false` |
+| `DATAJUD_API_KEY` | se a demo usar consulta CNJ |
+| `SMTP_HOST` / `SMTP_PORT` / `SMTP_USER` / `SMTP_PASS` / `SMTP_FROM` | opcional; sem SMTP, e-mails de convite/reset só caem no inbox |
 
 `PORT` o Railway injeta sozinho — não fixe 3001.
+
+Checklist de variáveis a partir do `.env` local: manter **só no PC** (não versionar secrets). Use a tabela acima no painel Railway/Vercel.
 
 6. Deploy. Confira: `https://SEU-SERVICO.up.railway.app/health` → `"status":"ok"` e `"sentry":true`
 
@@ -107,6 +114,7 @@ No Railway, atualize:
 
 ```
 CORS_ORIGINS=https://SEU-APP.vercel.app
+APP_URL=https://SEU-APP.vercel.app
 ```
 
 Se tiver domínio custom, coloque os dois separados por vírgula, sem espaço extra:

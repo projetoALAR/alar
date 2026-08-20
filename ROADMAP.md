@@ -5,7 +5,7 @@ Itens já entregues (RBAC, signed URLs, validação, health, CI, Docker, chat ge
 
 **Como usar:** marque `[x]` quando concluir; mantenha a ordem das fases salvo urgência de negócio.
 
-**Última atualização:** 13/08/2026
+**Última atualização:** 20/08/2026
 
 ---
 
@@ -102,6 +102,10 @@ Objetivo: escritório confia em quem viu/alterou o quê; base LGPD.
 - [x] Política de senha reforçada + aviso de senha fraca
 - [x] Bloqueio / cooldown após N logins falhos (além do throttle)
 - [x] **2FA** para `ADMIN` e `ADVOGADO` (TOTP)
+- [x] **Esqueci / redefinir senha** (token 1h + e-mail)
+- [x] **Troca obrigatória** no 1º acesso (`mustChangePassword` + convite por e-mail)
+- [x] Status SMTP/`APP_URL` no admin + link de reset em dev sem SMTP
+- [x] Admin: senhas pendentes (badge + enviar link / senha temporária)
 - [x] Revisar RBAC fino: assistente só vê casos **atribuídos** (quando existir responsável)
 
 **Critério de pronto:** toda ação sensível gera log; admin consegue exportar/apagar cliente. ✅
@@ -130,6 +134,11 @@ Objetivo: fluxo diário de advogado, não só CRUD.
 - [x] Aba **Prazos** no caso: prazo principal, compromissos, tarefas e registro de intimação
 - [x] PDF da **capa do processo** (`GET /processos/:id/capa` + botão no caso)
 - [x] Relatórios com **filtro** (status, prazo, responsável) e CSV do recorte
+- [x] Consulta CNJ (DataJud, **uso não comercial**): dígito verificador, tribunal, preview sem gravar, Importar com snapshot no caso
+- [x] **Importar clientes** via Excel/CSV com **mapeamento de colunas** (planilha de qualquer sistema)
+- [x] **Importar casos** via Excel/CSV com mapeamento + vínculo por CPF/CNPJ
+- [x] **Importar equipe** via Excel/CSV com mapeamento + senha temporária padrão
+- [x] Hardening importação: validação no mapeamento, relatório filtrável + CSV de problemas, limite por tipo
 
 **Critério de pronto:** abrir um caso mostra histórico + responsável; busca encontra em &lt; 2 s. ✅ (core)
 
@@ -159,6 +168,7 @@ Objetivo: mudanças seguras e onboarding de dev rápido.
 - [x] Cliente tipado no front (schemas OpenAPI: clientes, processos, documentos, auth)
 - [x] Versionamento `/v1` nas rotas públicas
 - [x] E2E dos fluxos críticos: login → criar caso → upload → chat
+- [x] E2E auth senha (reset/admin) + importação clientes (preview → importar)
 - [x] Coverage mínimo no CI (auth, processos, chat, documentos, clientes, casos-acesso ≥ 60% linhas/statements)
 - [ ] Preview de PR (Vercel / ambiente efêmero)
 - [x] Serviço **web** no `docker-compose` (stack completa com um comando)
@@ -176,29 +186,27 @@ Só quando houver demanda real de mais de um escritório / monetização.
 - [ ] Convites por e-mail (magic link / token)
 - [ ] Planos e billing (Stripe)
 - [ ] Integração Google Calendar / e-mail
-- [ ] Consulta processual (DataJud/CNJ ou provedor)
+- [ ] Provedor **comercial** de andamentos (Jusbrasil / Escavador / Judit) para lançamento pago — DataJud só cobre uso não comercial
 - [ ] App mobile (PWA primeiro)
 
 ---
 
-## Entregas recentes (13/08/2026) — branch `feat/integracao-api`
+## Entregas recentes (20/08/2026) — branch `feat/integracao-api`
 
 | Item | Backend | Frontend |
 |------|---------|----------|
-| Timeline + comentários internos | `2af15c8` | `20c1671` |
-| Busca global | `a836d03` | `d1ce933` |
-| Lembretes de prazo (cron 8h) | `9599f2f` | — |
-| Onboarding + empty states | — | `5397e11` |
-| Citações de anexos no chat | `2303b23` | `f58b5a9` |
-| URLs em português + ficha do cliente | `e49ca27` | `4c7ac06` |
-| Aba Prazos + intimação | `ca31e54` | `94cbd34` |
-| Capa PDF do processo | `fe632e0` / `bb286e2` | `9187cdd` |
-| Relatórios filtráveis | — | `c22eaee` |
-| 2FA para advogado | `6b126b9` | `76a48b8` |
+| Import clientes/casos/equipe + mapeamento | `f914c6b`+ | `10c6b9d`+ |
+| Esqueci/redefinir senha + troca obrigatória | idem | idem |
+| SMTP status / reset em dev / hardening import | `29063f9` | `f3e2aef` |
+| Admin: senhas pendentes (link / senha temp.) | `0d74005` | `b777b03` |
+| E2E auth senha + import clientes | `0725476` | — |
+| Consulta CNJ (DataJud, não comercial) | `GET /consulta-processual` | aba Andamentos |
+| Timeline, busca, prazos, capa PDF, 2FA, etc. | (entregas 12–14/08) | (entregas 12–14/08) |
 
 Migrations aplicadas no Supabase compartilhado:
 - `20260812160000_add_processo_comentario`
 - `20260812170000_add_mensagem_fontes`
+- `20260814120000_add_processo_andamentos_consulta`
 *(anteriores: responsável, TOTP, etc.)*
 
 ---

@@ -1,7 +1,7 @@
 # Relatório de mudanças — Alar
 
 **Para:** Luiz  
-**Data:** 12/08/2026 (atualização)  
+**Data:** 20/08/2026 (atualização)  
 **Branch:** `feat/integracao-api` (backend e frontend)
 
 **Onde está o código (org projetoALAR)**
@@ -15,6 +15,7 @@
 **Docs úteis no repo `alar`**
 - Este relatório: [`RELATORIO-MUDANCAS-PARA-LUIZ.md`](https://github.com/projetoALAR/alar/blob/main/RELATORIO-MUDANCAS-PARA-LUIZ.md)
 - Próximas etapas: [`ROADMAP.md`](https://github.com/projetoALAR/alar/blob/main/ROADMAP.md)
+- Deploy HTTPS: [`DEPLOY.md`](https://github.com/projetoALAR/alar/blob/main/DEPLOY.md)
 
 ---
 
@@ -23,12 +24,37 @@
 | Fase | Status |
 |------|--------|
 | 0 — Alinhamento | ✅ |
-| 1 — Confiança / ops | 🟡 falta **deploy HTTPS** (bloqueado até liberar org Railway/Vercel) |
-| 2 — Segurança & LGPD | ✅ (AuditLog, export/anonimizar, senha forte, lockout, 2FA admin, RBAC assistente) |
-| 3 — Produto / UX | ✅ (responsável, timeline, busca, prazos, onboarding, branding, a11y/tablet) |
-| 4 — IA | ✅ core (citações, quota, feedback, export, rascunho+revisão, anti-alucinação) |
-| 5 — Engenharia | 🟡 Swagger + E2E crítico + compose (`db`+`api`+`web`) |
+| 1 — Confiança / ops | 🟡 deploy Railway/Vercel (aguardando URLs + smoke HTTPS/CORS/`APP_URL`) |
+| 2 — Segurança & LGPD | ✅ (+ reset de senha, troca obrigatória, admin senhas pendentes) |
+| 3 — Produto / UX | ✅ (+ import Excel/CSV clientes/casos/equipe + DataJud) |
+| 4 — IA | ✅ core |
+| 5 — Engenharia | 🟡 (+ E2E auth senha + import); falta Preview de PR |
 | 6 — Escala | depois |
+
+---
+
+## Entregas 20/08/2026 (já na `feat/integracao-api`)
+
+### Backend (topo ~`0725476`)
+
+| Tema | Destaque |
+|------|----------|
+| Importação | Clientes/casos/equipe com mapeamento de colunas + Excel modelo |
+| Auth | Forgot/reset (token 1h), `mustChangePassword`, convite e-mail |
+| Admin | Enviar link de reset / definir senha temporária |
+| Ops | Status SMTP + `APP_URL`; health com flags `smtp`/`appUrl` |
+| Testes | E2E `auth-senha-importacao.e2e-spec.ts` + specs unitários |
+
+### Frontend (topo ~`b777b03`)
+
+| Tema | Destaque |
+|------|----------|
+| Importação | Diálogo de mapeamento, validação, relatório filtrável, CSV de problemas |
+| Auth | `/esqueci-senha`, `/redefinir-senha`, `/trocar-senha` |
+| Admin | Badge troca pendente + ações de reset/senha temp. |
+| Config | Card status de e-mail transacional |
+
+**Pedido ao Luiz:** enviar URLs públicas (Railway + Vercel) para smoke HTTPS e alinhar `CORS_ORIGINS`/`APP_URL`; redeploy da `feat/integracao-api` se ainda não estiver no topo.
 
 ---
 
