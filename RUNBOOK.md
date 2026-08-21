@@ -12,11 +12,14 @@ Sem secrets neste arquivo — use `.env` / `.env.local` / painel do provedor.
 | 3 | Health check | OK |
 | 4 | Logs e request id | OK (código) |
 | 5 | Sentry | OK (DSN + Issue ALAR-1; flags de teste desligadas) |
-| 6 | Backup / restore | Documentado; backup real ainda não testado |
+| 6 | Backup / restore | Script `backup:smoke` pronto; instalar `pg_dump` / usar `DIRECT_URL` para rodar |
 | 7 | Rotação de secrets | Checklist pronto; só usar se precisar rotacionar |
 | 8 | Desligar servidores | OK (procedimento) |
 | — | Docker Compose (opcional) | Não usado no fluxo diário |
 | — | Deploy HTTPS (Fase 1 roadmap) | Em andamento — ver [`DEPLOY.md`](./DEPLOY.md) |
+| 9 | SMTP local (Ethereal) | OK (script + teste no admin) |
+
+**Demo para agência:** roteiro completo em [`DEMO.md`](./DEMO.md) (`npm run seed:demo` + script de 10–12 min).
 
 ---
 
@@ -155,8 +158,19 @@ Passo a passo completo: **[`SENTRY.md`](./SENTRY.md)**.
 ## 6. Backup / restore (Postgres) — documentado
 
 - [x] Procedimento documentado abaixo
-- [ ] Backup real testado (painel Supabase ou `pg_dump`)
-- [ ] Restore de teste em ambiente seguro (não produção)
+- [x] Smoke de backup (`npm run backup:smoke`) — dump + `pg_restore -l`
+- [ ] Restore de teste em ambiente seguro (não produção / não Supabase compartilhado)
+
+**Smoke local (recomendado)**
+
+```bash
+cd workspace-juridico-backend
+# Prefira DIRECT_URL (conexão direta) no .env — não o pooler
+npm run backup:smoke
+```
+
+O script grava em `backups/alar-smoke-*.dump` (gitignored) e valida o TOC do arquivo.
+Requer `pg_dump` / `pg_restore` no PATH (cliente PostgreSQL).
 
 **Supabase (painel)**  
 - Settings → Database → backups automáticos (plano)  
@@ -168,7 +182,7 @@ Passo a passo completo: **[`SENTRY.md`](./SENTRY.md)**.
 # Backup
 pg_dump "$DIRECT_URL" -Fc -f alar-backup.dump
 
-# Restore (cuidado: sobrescreve)
+# Restore (cuidado: sobrescreve — só em ambiente descartável)
 pg_restore --clean --if-exists -d "$DIRECT_URL" alar-backup.dump
 ```
 
@@ -198,11 +212,28 @@ Encerrar os terminais `npm run start:dev` / `npm run dev`, ou liberar as portas 
 
 ---
 
+## 9. SMTP local (Ethereal, grátis) — OK
+
+Sem cartão. Útil para testar convite, reset e lembretes.
+
+```bash
+cd workspace-juridico-backend
+npm run smtp:ethereal
+```
+
+Cole a saída no `.env`, reinicie a API, entre como **admin** → **Configurações** → **Enviar e-mail de teste**.  
+Com Ethereal, a UI mostra o link de preview. Caixa: [ethereal.email/login](https://ethereal.email/login) (usuário/senha do script).
+
+Sem SMTP o app continua ok: inbox + link de reset em desenvolvimento.
+
+---
+
 ## Próximos passos sugeridos
 
 1. Deploy HTTPS — guia [`DEPLOY.md`](./DEPLOY.md) (Railway API + Vercel front)
 2. Testar um backup real (§6)
-3. (Opcional) Resolver/ignorar issue ALAR-1 no Sentry — era só o teste
+3. Em produção, trocar Ethereal por SMTP real
+4. (Opcional) Resolver/ignorar issue ALAR-1 no Sentry — era só o teste
 
 ---
 

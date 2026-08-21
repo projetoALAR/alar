@@ -4,6 +4,7 @@ Sistema full-stack para gestão de escritório jurídico: clientes, casos/proces
 
 **Próximas etapas:** veja o [`ROADMAP.md`](./ROADMAP.md).  
 **Operação diária:** [`RUNBOOK.md`](./RUNBOOK.md) (subir, admin, health, Sentry, backup).  
+**Demo para agência:** [`DEMO.md`](./DEMO.md) (roteiro 10–12 min + seed).  
 **Deploy HTTPS:** [`DEPLOY.md`](./DEPLOY.md) (Railway + Vercel).  
 **Sentry:** [`SENTRY.md`](./SENTRY.md).
 
